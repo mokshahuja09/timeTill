@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+<head>
+    <style type = "text/css">
+        *{
+            background-color: grey;
+            text-align: center;
+            font-family: monospace;
+            align-items: center;
+        }
+        h1{
+            background-color: darkgray;
+            text-align: center;
+        }
+        body{
+            margin: 0;
+            display:flex;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #timer{
+            font-size: 6rem;
+            letter-spacing: 0.2em;
+            color: #ffffff;
+            background-color: rgb(52, 52, 52);    
+            padding: 1rem, 2rem;
+
+        }
+        table{
+            width: 100%;
+            font-size: 3rem;
+            border: 4px solid black;
+        }
+        
+    </style>
+    <title>TimeToYourBirthday</title>
+
+
+</head>
+
+<body>
+    <h1>There's only so much time left until your birthday... </h1>
+
+    <table style = "width:50%";font-size = "5rem"; border: 4px>
+        <th scope = "col">Days</th>
+        <th scope = "col">Hours</th>
+        <th scope = "col">Minutes</th>
+        <th scope = "col">Seconds</th>
+        <tr>
+            <td id = "days"></td>
+
+            <td id = "hours"></td>
+
+            <td id = "minutes"></td>
+
+            <td id = "seconds"></td>
+        </tr>
+
+    </table>
+    <p id = "timer">
+    </p>
+
+        <script>
+
+        let target = new Date(2025, 7, 31, 0, 0, 0);
+
+        function updateTimer(){
+
+            let now = new Date();
+            let diffInSeconds = target - now
+
+            if (diffInSeconds <= 0){
+                document.getElementById("timer").textContent = "Happy Birthday!"
+                clearInterval(timerInterval);
+                return;
+            }
+
+            const days = Math.floor(diffInSeconds/(1000 * 60 * 60 * 24));
+            diffInSeconds =  diffInSeconds%(1000 * 60 * 60 * 24);
+
+            const hours = Math.floor(diffInSeconds/(1000 * 60 * 60));
+            diffInSeconds = diffInSeconds%(1000 * 60 * 60);
+
+            const minutes = Math.floor(diffInSeconds/(1000 * 60));
+            diffInSeconds =  diffInSeconds%(1000 * 60);
+
+            const seconds =  Math.floor(diffInSeconds/(1000));
+
+            let dayString = " ";
+            let hourString = " ";
+            let minuteString = " ";
+            let secondString = " ";
+
+            if (days < 10){
+                dayString = `0${days}`
+            }
+            else{
+                dayString = `${days}`
+            }
+
+            if (hours < 10){
+                hourString = `0${hours}`
+            }
+            else{
+                hourString = `${hours}`
+            }
+
+            if (minutes < 10){
+                minuteString = `0${minutes}`
+            }
+            else{
+                minuteString = `${minutes}`
+            }
+
+            if (seconds < 10){
+                secondString = `0${seconds}`
+            }
+            else{
+                secondString = `${seconds}`
+            }
+
+
+
+            document.getElementById("days").textContent = dayString;
+            document.getElementById("hours").textContent = hourString;
+            document.getElementById("minutes").textContent = minuteString;
+            document.getElementById("seconds").textContent = secondString;
+
+
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 500);
+        
+    </script>
+</body>
+
+
+
+
+
+</html>
